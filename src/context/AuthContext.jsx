@@ -51,11 +51,13 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
+        setLoading(true);
         await signInWithEmailAndPassword(auth, email, password);
         // State update handled by onAuthStateChanged
     };
 
     const register = async (username, email, password) => {
+        setLoading(true);
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const newUser = {
             username,
