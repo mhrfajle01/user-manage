@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
-const PrivateRoute = ({ children, adminOnly = false }) => {
+const PrivateRoute = ({ children, role }) => {
     const { user, loading } = useContext(AuthContext);
 
     if (loading) return <div>Loading...</div>;
@@ -11,7 +11,7 @@ const PrivateRoute = ({ children, adminOnly = false }) => {
         return <Navigate to="/login" />;
     }
 
-    if (adminOnly && user.role !== 'admin') {
+    if (role && user.role !== role) {
         return <Navigate to="/dashboard" />;
     }
 
